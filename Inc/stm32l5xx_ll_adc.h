@@ -4940,7 +4940,7 @@ __STATIC_INLINE uint32_t LL_ADC_GetAnalogWDMonitChannels(ADC_TypeDef *ADCx, uint
   const __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->CFGR, ((AWDy & ADC_AWD_CRX_REGOFFSET_MASK) >> ADC_AWD_CRX_REGOFFSET_POS)
                                                    + ((AWDy & ADC_AWD_CR12_REGOFFSETGAP_MASK) * ADC_AWD_CR12_REGOFFSETGAP_VAL));
 
-  uint32_t AnalogWDMonitChannels = (READ_BIT(*preg, AWDy) & AWDy & ADC_AWD_CR_ALL_CHANNEL_MASK);
+  uint32_t AnalogWDMonitChannels = (READ_BIT(*preg, AWDy) & ADC_AWD_CR_ALL_CHANNEL_MASK);
 
   /* If "AnalogWDMonitChannels" == 0, then the selected AWD is disabled       */
   /* (parameter value LL_ADC_AWD_DISABLE).                                    */

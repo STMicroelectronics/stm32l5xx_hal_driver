@@ -748,10 +748,10 @@ typedef struct
   * @retval The new state of FLASH_FLAG (SET or RESET).
   */
 #define __HAL_FLASH_GET_FLAG(__FLAG__)          ((((__FLAG__) & FLASH_FLAG_ECCR_ERRORS) != 0U) ? \
-                                                 (READ_BIT(FLASH->ECCR, (__FLAG__)) == (__FLAG__)) : \
+                                                 (READ_BIT(FLASH->ECCR, (__FLAG__)) != 0U) : \
                                                  ((((__FLAG__) & (FLASH_FLAG_OPTWERR)) != 0U) ? \
-                                                  (READ_BIT(FLASH->NSSR, (__FLAG__)) == (__FLAG__)) : \
-                                                  (READ_BIT(FLASH->SECSR, (__FLAG__)) == (__FLAG__))))
+                                                  (READ_BIT(FLASH->NSSR, (__FLAG__)) != 0U) : \
+                                                  (READ_BIT(FLASH->SECSR, (__FLAG__)) != 0U)))
 /**
   * @brief  Check whether the specified non-secure FLASH flags from the secure world is set or not.
   * @param  __FLAG__ specifies the FLASH flag to check.
@@ -770,8 +770,8 @@ typedef struct
   * @retval The new state of FLASH_FLAG (SET or RESET).
   */
 #define __HAL_FLASH_GET_FLAG_NS(__FLAG__)       ((((__FLAG__) & FLASH_FLAG_ECCR_ERRORS) != 0U) ? \
-                                                 (READ_BIT(FLASH->ECCR, (__FLAG__)) == (__FLAG__)) : \
-                                                 (READ_BIT(FLASH->NSSR, (__FLAG__)) == (__FLAG__)))
+                                                 (READ_BIT(FLASH->ECCR, (__FLAG__)) != 0U) : \
+                                                 (READ_BIT(FLASH->NSSR, (__FLAG__)) != 0U))
 #else
 /**
   * @brief  Check whether the specified non-secure FLASH flags from the non-secure world is set or not.
@@ -791,8 +791,8 @@ typedef struct
   * @retval The new state of FLASH_FLAG (SET or RESET).
   */
 #define __HAL_FLASH_GET_FLAG(__FLAG__)          ((((__FLAG__) & FLASH_FLAG_ECCR_ERRORS) != 0U) ? \
-                                                 (READ_BIT(FLASH->ECCR, (__FLAG__)) == (__FLAG__)) : \
-                                                 (READ_BIT(FLASH->NSSR, (__FLAG__)) == (__FLAG__)))
+                                                 (READ_BIT(FLASH->ECCR, (__FLAG__)) != 0U) : \
+                                                 (READ_BIT(FLASH->NSSR, (__FLAG__)) != 0U))
 #endif /* __ARM_FEATURE_CMSE */
 
 #if defined (__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE == 3U)

@@ -151,7 +151,7 @@ typedef struct
   * @{
   */
 #define  MPU_ACCESS_NOT_SHAREABLE        0U
-#define  MPU_ACCESS_OUTER_SHAREABLE      1U
+#define  MPU_ACCESS_OUTER_SHAREABLE      2U
 #define  MPU_ACCESS_INNER_SHAREABLE      3U
 /**
   * @}

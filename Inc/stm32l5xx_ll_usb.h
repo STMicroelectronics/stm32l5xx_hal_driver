@@ -22,7 +22,7 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif
+#endif /* __cplusplus */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32l5xx_hal_def.h"
@@ -59,12 +59,13 @@ typedef struct
                                          This parameter must be a number between Min_Data = 1 and Max_Data = 15 */
 
   uint32_t speed;                   /*!< USB Core speed.
-                                         This parameter can be any value of @ref USB_Core_Speed                 */
+                                         This parameter can be any value of @ref PCD_Speed/HCD_Speed
+                                                                                 (HCD_SPEED_xxx, HCD_SPEED_xxx) */
 
   uint32_t ep0_mps;                 /*!< Set the Endpoint 0 Max Packet size.                                    */
 
   uint32_t phy_itface;              /*!< Select the used PHY interface.
-                                         This parameter can be any value of @ref USB_Core_PHY                   */
+                                         This parameter can be any value of @ref PCD_PHY_Module/HCD_PHY_Module  */
 
   uint32_t Sof_enable;              /*!< Enable or disable the output of the SOF signal.                        */
 
@@ -73,6 +74,8 @@ typedef struct
   uint32_t lpm_enable;              /*!< Enable or disable Battery charging.                                    */
 
   uint32_t battery_charging_enable; /*!< Enable or disable Battery charging.                                    */
+
+  uint32_t dma_enable;              /*!< dma_enable state unused, DMA not supported by FS instance              */
 } USB_CfgTypeDef;
 
 typedef struct
@@ -166,6 +169,14 @@ typedef struct
 #define PMA_ACCESS                             1U
 
 #define EP_ADDR_MSK                            0x7U
+
+#ifndef USB_EP_RX_STRX
+#define USB_EP_RX_STRX                         (0x3U << 12)
+#endif /* USB_EP_RX_STRX */
+
+#ifndef USE_USB_DOUBLE_BUFFER
+#define USE_USB_DOUBLE_BUFFER                  1U
+#endif /* USE_USB_DOUBLE_BUFFER */
 /**
   * @}
   */
@@ -193,7 +204,8 @@ HAL_StatusTypeDef USB_DeactivateEndpoint(USB_TypeDef *USBx, USB_EPTypeDef *ep);
 HAL_StatusTypeDef USB_EPStartXfer(USB_TypeDef *USBx, USB_EPTypeDef *ep);
 HAL_StatusTypeDef USB_EPSetStall(USB_TypeDef *USBx, USB_EPTypeDef *ep);
 HAL_StatusTypeDef USB_EPClearStall(USB_TypeDef *USBx, USB_EPTypeDef *ep);
-#endif
+HAL_StatusTypeDef USB_EPStopXfer(USB_TypeDef *USBx, USB_EPTypeDef *ep);
+#endif /* defined (HAL_PCD_MODULE_ENABLED) */
 
 HAL_StatusTypeDef USB_SetDevAddress(USB_TypeDef *USBx, uint8_t address);
 HAL_StatusTypeDef USB_DevConnect(USB_TypeDef *USBx);
@@ -228,7 +240,7 @@ void              USB_ReadPMA(USB_TypeDef *USBx, uint8_t *pbUsrBuf,
 
 #ifdef __cplusplus
 }
-#endif
+#endif /* __cplusplus */
 
 
 #endif /* STM32L5xx_LL_USB_H */

@@ -100,6 +100,7 @@ HAL_StatusTypeDef  HAL_PCDEx_PMAConfig(PCD_HandleTypeDef *hpcd, uint16_t ep_addr
     /* Configure the PMA */
     ep->pmaadress = (uint16_t)pmaadress;
   }
+#if (USE_USB_DOUBLE_BUFFER == 1U)
   else /* USB_DBL_BUF */
   {
     /* Double Buffer Endpoint */
@@ -108,6 +109,7 @@ HAL_StatusTypeDef  HAL_PCDEx_PMAConfig(PCD_HandleTypeDef *hpcd, uint16_t ep_addr
     ep->pmaaddr0 = (uint16_t)(pmaadress & 0xFFFFU);
     ep->pmaaddr1 = (uint16_t)((pmaadress & 0xFFFF0000U) >> 16);
   }
+#endif /* (USE_USB_DOUBLE_BUFFER == 1U) */
 
   return HAL_OK;
 }
@@ -159,23 +161,8 @@ void HAL_PCDEx_BCD_VBUSDetect(PCD_HandleTypeDef *hpcd)
   USB_TypeDef *USBx = hpcd->Instance;
   uint32_t tickstart = HAL_GetTick();
 
-  /* Wait Detect flag or a timeout is happen*/
-  while ((USBx->BCDR & USB_BCDR_DCDET) == 0U)
-  {
-    /* Check for the Timeout */
-    if ((HAL_GetTick() - tickstart) > 1000U)
-    {
-#if (USE_HAL_PCD_REGISTER_CALLBACKS == 1U)
-      hpcd->BCDCallback(hpcd, PCD_BCD_ERROR);
-#else
-      HAL_PCDEx_BCD_Callback(hpcd, PCD_BCD_ERROR);
-#endif /* USE_HAL_PCD_REGISTER_CALLBACKS */
-
-      return;
-    }
-  }
-
-  HAL_Delay(200U);
+  /* Wait for Min DCD Timeout */
+  HAL_Delay(300U);
 
   /* Data Pin Contact ? Check Detect flag */
   if ((USBx->BCDR & USB_BCDR_DCDET) == USB_BCDR_DCDET)
@@ -235,11 +222,24 @@ void HAL_PCDEx_BCD_VBUSDetect(PCD_HandleTypeDef *hpcd)
 
   /* Battery Charging capability discovery finished Start Enumeration */
   (void)HAL_PCDEx_DeActivateBCD(hpcd);
+
+  /* Check for the Timeout, else start USB Device */
+  if ((HAL_GetTick() - tickstart) > 1000U)
+  {
 #if (USE_HAL_PCD_REGISTER_CALLBACKS == 1U)
-  hpcd->BCDCallback(hpcd, PCD_BCD_DISCOVERY_COMPLETED);
+    hpcd->BCDCallback(hpcd, PCD_BCD_ERROR);
 #else
-  HAL_PCDEx_BCD_Callback(hpcd, PCD_BCD_DISCOVERY_COMPLETED);
+    HAL_PCDEx_BCD_Callback(hpcd, PCD_BCD_ERROR);
 #endif /* USE_HAL_PCD_REGISTER_CALLBACKS */
+  }
+  else
+  {
+#if (USE_HAL_PCD_REGISTER_CALLBACKS == 1U)
+    hpcd->BCDCallback(hpcd, PCD_BCD_DISCOVERY_COMPLETED);
+#else
+    HAL_PCDEx_BCD_Callback(hpcd, PCD_BCD_DISCOVERY_COMPLETED);
+#endif /* USE_HAL_PCD_REGISTER_CALLBACKS */
+  }
 }
 
 

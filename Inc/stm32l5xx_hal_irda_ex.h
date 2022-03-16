@@ -254,3 +254,4 @@ extern "C" {
 #endif
 
 #endif /* STM32L5xx_HAL_IRDA_EX_H */
+

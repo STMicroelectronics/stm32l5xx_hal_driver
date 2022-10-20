@@ -919,6 +919,7 @@ HAL_StatusTypeDef HAL_DMA_RegisterCallback(DMA_HandleTypeDef *hdma, HAL_DMA_Call
            break;
 
      default:
+     case HAL_DMA_XFER_ALL_CB_ID:
            status = HAL_ERROR;
            break;
     }

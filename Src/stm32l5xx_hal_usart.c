@@ -2953,6 +2953,7 @@ static HAL_StatusTypeDef USART_SetConfig(USART_HandleTypeDef *husart)
       usartdiv = (uint32_t)(USART_DIV_SAMPLING8(LSE_VALUE, husart->Init.BaudRate, husart->Init.ClockPrescaler));
       break;
     default:
+    case UART_CLOCKSOURCE_UNDEFINED:
       ret = HAL_ERROR;
       break;
   }

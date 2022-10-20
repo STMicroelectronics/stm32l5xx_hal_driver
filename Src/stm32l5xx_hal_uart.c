@@ -3107,6 +3107,7 @@ HAL_StatusTypeDef UART_SetConfig(UART_HandleTypeDef *huart)
       case UART_CLOCKSOURCE_LSE:
         pclk = (uint32_t) LSE_VALUE;
         break;
+      case UART_CLOCKSOURCE_UNDEFINED:
       default:
         pclk = 0U;
         ret = HAL_ERROR;
@@ -3163,6 +3164,7 @@ HAL_StatusTypeDef UART_SetConfig(UART_HandleTypeDef *huart)
         pclk = (uint32_t) LSE_VALUE;
         break;
       default:
+      case UART_CLOCKSOURCE_UNDEFINED:
         pclk = 0U;
         ret = HAL_ERROR;
         break;
@@ -3204,6 +3206,7 @@ HAL_StatusTypeDef UART_SetConfig(UART_HandleTypeDef *huart)
         pclk = (uint32_t) LSE_VALUE;
         break;
       default:
+      case UART_CLOCKSOURCE_UNDEFINED:
         pclk = 0U;
         ret = HAL_ERROR;
         break;

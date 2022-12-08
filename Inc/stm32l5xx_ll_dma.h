@@ -1896,6 +1896,49 @@ __STATIC_INLINE uint32_t LL_DMA_GetPeriphRequest(DMA_TypeDef *DMAx, uint32_t Cha
 }
 
 /**
+  * @brief Set Memory 1 address (used in case of Double buffer mode).
+  * @rmtoll CM1AR        M1A         LL_DMA_SetMemory1Address
+  * @param  DMAx DMAx Instance
+  * @param  Channel This parameter can be one of the following values:
+  *         @arg @ref LL_DMA_CHANNEL_1
+  *         @arg @ref LL_DMA_CHANNEL_2
+  *         @arg @ref LL_DMA_CHANNEL_3
+  *         @arg @ref LL_DMA_CHANNEL_4
+  *         @arg @ref LL_DMA_CHANNEL_5
+  *         @arg @ref LL_DMA_CHANNEL_6
+  *         @arg @ref LL_DMA_CHANNEL_7
+  *         @arg @ref LL_DMA_CHANNEL_8
+  * @param  MemoryAddress Between 0 to 0xFFFFFFFF
+  * @retval None
+  */
+__STATIC_INLINE void LL_DMA_SetMemory1Address(DMA_TypeDef *DMAx, uint32_t Channel, uint32_t MemoryAddress)
+{
+  uint32_t dma_base_addr = (uint32_t)DMAx;
+  WRITE_REG(((DMA_Channel_TypeDef *)(dma_base_addr + CHANNEL_OFFSET_TAB[Channel]))->CM1AR, MemoryAddress);
+}
+
+/**
+  * @brief  Get Memory 1 address (used in case of Double buffer mode).
+  * @rmtoll CM1AR         MA            LL_DMA_GetMemory1Address
+  * @param  DMAx DMAx Instance
+  * @param  Channel This parameter can be one of the following values:
+  *         @arg @ref LL_DMA_CHANNEL_1
+  *         @arg @ref LL_DMA_CHANNEL_2
+  *         @arg @ref LL_DMA_CHANNEL_3
+  *         @arg @ref LL_DMA_CHANNEL_4
+  *         @arg @ref LL_DMA_CHANNEL_5
+  *         @arg @ref LL_DMA_CHANNEL_6
+  *         @arg @ref LL_DMA_CHANNEL_7
+  *         @arg @ref LL_DMA_CHANNEL_8
+  * @retval Between Min_Data = 0 and Max_Data = 0xFFFFFFFF
+  */
+__STATIC_INLINE uint32_t LL_DMA_GetMemory1Address(DMA_TypeDef *DMAx, uint32_t Channel)
+{
+  uint32_t dma_base_addr = (uint32_t)DMAx;
+  return (READ_REG(((DMA_Channel_TypeDef *)(dma_base_addr + CHANNEL_OFFSET_TAB[Channel]))->CM1AR));
+}
+
+/**
   * @}
   */
 
@@ -2842,3 +2885,5 @@ void LL_DMA_StructInit(LL_DMA_InitTypeDef *DMA_InitStruct);
 #endif
 
 #endif /* STM32L5xx_LL_DMA_H */
+
+

@@ -83,7 +83,7 @@ extern "C" {
   * @{
   */
 
-/** @addtogroup I2CEx_Exported_Functions_Group1 I2C Extended Filter Mode Functions
+/** @addtogroup I2CEx_Exported_Functions_Group1 Filter Mode Functions
   * @{
   */
 /* Peripheral Control functions  ************************************************/
@@ -93,7 +93,7 @@ HAL_StatusTypeDef HAL_I2CEx_ConfigDigitalFilter(I2C_HandleTypeDef *hi2c, uint32_
   * @}
   */
 
-/** @addtogroup I2CEx_Exported_Functions_Group2 I2C Extended WakeUp Mode Functions
+/** @addtogroup I2CEx_Exported_Functions_Group2 WakeUp Mode Functions
   * @{
   */
 HAL_StatusTypeDef HAL_I2CEx_EnableWakeUp(I2C_HandleTypeDef *hi2c);
@@ -102,7 +102,7 @@ HAL_StatusTypeDef HAL_I2CEx_DisableWakeUp(I2C_HandleTypeDef *hi2c);
   * @}
   */
 
-/** @addtogroup I2CEx_Exported_Functions_Group3 I2C Extended FastModePlus Functions
+/** @addtogroup I2CEx_Exported_Functions_Group3 Fast Mode Plus Functions
   * @{
   */
 void HAL_I2CEx_EnableFastModePlus(uint32_t ConfigFastModePlus);
@@ -110,7 +110,6 @@ void HAL_I2CEx_DisableFastModePlus(uint32_t ConfigFastModePlus);
 /**
   * @}
   */
-
 
 /**
   * @}

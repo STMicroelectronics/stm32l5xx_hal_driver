@@ -27,7 +27,7 @@
                     ##### How to use this driver #####
   ==============================================================================
     [..]
-      (#) Fill parameters of Init structure in USB_OTG_CfgTypeDef structure.
+      (#) Fill parameters of Init structure in USB_CfgTypeDef structure.
 
       (#) Call USB_CoreInit() API to initialize the USB Core peripheral.
 
@@ -242,8 +242,16 @@ HAL_StatusTypeDef USB_ActivateEndpoint(USB_TypeDef *USBx, USB_EPTypeDef *ep)
       PCD_SET_EP_RX_CNT(USBx, ep->num, ep->maxpacket);
       PCD_CLEAR_RX_DTOG(USBx, ep->num);
 
-      /* Configure VALID status for the Endpoint */
-      PCD_SET_EP_RX_STATUS(USBx, ep->num, USB_EP_RX_VALID);
+      if (ep->num == 0U)
+      {
+        /* Configure VALID status for EP0 */
+        PCD_SET_EP_RX_STATUS(USBx, ep->num, USB_EP_RX_VALID);
+      }
+      else
+      {
+        /* Configure NAK status for OUT Endpoint */
+        PCD_SET_EP_RX_STATUS(USBx, ep->num, USB_EP_RX_NAK);
+      }
     }
   }
 #if (USE_USB_DOUBLE_BUFFER == 1U)
@@ -741,9 +749,9 @@ HAL_StatusTypeDef  USB_DevDisconnect(USB_TypeDef *USBx)
 /**
   * @brief  USB_ReadInterrupts return the global USB interrupt status
   * @param  USBx Selected device
-  * @retval HAL status
+  * @retval USB Global Interrupt status
   */
-uint32_t  USB_ReadInterrupts(USB_TypeDef *USBx)
+uint32_t USB_ReadInterrupts(USB_TypeDef *USBx)
 {
   uint32_t tmpreg;
 

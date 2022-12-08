@@ -5,6 +5,7 @@
   * @brief   STM32 assert template file.
   *          This file should be copied to the application folder and renamed
   *          to stm32_assert.h.
+  *
   ******************************************************************************
   * @attention
   *
@@ -51,3 +52,6 @@ void assert_failed(uint8_t *file, uint32_t line);
 #endif
 
 #endif /* STM32_ASSERT_H */
+
+
+

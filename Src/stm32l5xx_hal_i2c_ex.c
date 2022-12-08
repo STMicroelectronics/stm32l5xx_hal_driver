@@ -5,7 +5,9 @@
   * @brief   I2C Extended HAL module driver.
   *          This file provides firmware functions to manage the following
   *          functionalities of I2C Extended peripheral:
-  *           + Extended features functions
+  *           + Filter Mode Functions
+  *           + WakeUp Mode Functions
+  *           + FastModePlus Functions
   *
   ******************************************************************************
   * @attention
@@ -43,7 +45,6 @@
           (++) HAL_I2CEx_EnableFastModePlus()
           (++) HAL_I2CEx_DisableFastModePlus()
   @endverbatim
-  ******************************************************************************
   */
 
 /* Includes ------------------------------------------------------------------*/
@@ -71,17 +72,15 @@
   * @{
   */
 
-/** @defgroup I2CEx_Exported_Functions_Group1 Extended features functions
-  * @brief    Extended features functions
+/** @defgroup I2CEx_Exported_Functions_Group1 Filter Mode Functions
+  * @brief    Filter Mode Functions
   *
 @verbatim
  ===============================================================================
-                      ##### Extended features functions #####
+                      ##### Filter Mode Functions #####
  ===============================================================================
     [..] This section provides functions allowing to:
       (+) Configure Noise Filters
-      (+) Configure Wake Up Feature
-      (+) Configure Fast Mode Plus
 
 @endverbatim
   * @{
@@ -182,6 +181,23 @@ HAL_StatusTypeDef HAL_I2CEx_ConfigDigitalFilter(I2C_HandleTypeDef *hi2c, uint32_
     return HAL_BUSY;
   }
 }
+/**
+  * @}
+  */
+
+/** @defgroup I2CEx_Exported_Functions_Group2 WakeUp Mode Functions
+  * @brief    WakeUp Mode Functions
+  *
+@verbatim
+ ===============================================================================
+                      ##### WakeUp Mode Functions #####
+ ===============================================================================
+    [..] This section provides functions allowing to:
+      (+) Configure Wake Up Feature
+
+@endverbatim
+  * @{
+  */
 
 /**
   * @brief  Enable I2C wakeup from Stop mode(s).
@@ -260,6 +276,23 @@ HAL_StatusTypeDef HAL_I2CEx_DisableWakeUp(I2C_HandleTypeDef *hi2c)
     return HAL_BUSY;
   }
 }
+/**
+  * @}
+  */
+
+/** @defgroup I2CEx_Exported_Functions_Group3 Fast Mode Plus Functions
+  * @brief    Fast Mode Plus Functions
+  *
+@verbatim
+ ===============================================================================
+                      ##### Fast Mode Plus Functions #####
+ ===============================================================================
+    [..] This section provides functions allowing to:
+      (+) Configure Fast Mode Plus
+
+@endverbatim
+  * @{
+  */
 
 /**
   * @brief Enable the I2C fast mode plus driving capability.
@@ -318,11 +351,9 @@ void HAL_I2CEx_DisableFastModePlus(uint32_t ConfigFastModePlus)
   /* Disable fast mode plus driving capability for selected pin */
   CLEAR_BIT(SYSCFG->CFGR1, (uint32_t)ConfigFastModePlus);
 }
-
 /**
   * @}
   */
-
 /**
   * @}
   */

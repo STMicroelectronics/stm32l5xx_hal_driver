@@ -14,8 +14,8 @@
   * Copyright (c) 2019 STMicroelectronics.
   * All rights reserved.
   *
-  * This software is licensed under terms that can be found in the LICENSE file
-  * in the root directory of this software component.
+  * This software is licensed under terms that can be found in the LICENSE file in
+  * the root directory of this software component.
   * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
@@ -580,8 +580,8 @@ static void MPU_ConfigRegion(MPU_Type* MPUx, MPU_Region_InitTypeDef *MPU_RegionI
   }
   else
   {
-    MPUx->RBAR = 0U;
     MPUx->RLAR = 0U;
+    MPUx->RBAR = 0U;
   }
 }
 
@@ -631,3 +631,4 @@ static void MPU_ConfigMemoryAttributes(MPU_Type* MPUx, MPU_Attributes_InitTypeDe
 /**
   * @}
   */
+

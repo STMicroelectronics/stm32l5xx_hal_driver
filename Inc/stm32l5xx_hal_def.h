@@ -4,6 +4,7 @@
   * @author  MCD Application Team
   * @brief   This file contains HAL common defines, enumeration, macros and
   *          structures definitions.
+  *
   ******************************************************************************
   * @attention
   *
@@ -208,3 +209,5 @@ typedef enum
 #endif
 
 #endif /* STM32L5xx_HAL_DEF_H */
+
+

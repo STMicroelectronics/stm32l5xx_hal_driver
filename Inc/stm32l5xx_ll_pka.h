@@ -93,7 +93,7 @@ typedef struct
   */
 
 /** @defgroup PKA_LL_EC_MODE Operation Mode
-  * @brief    List of opearation mode.
+  * @brief    List of operation mode.
   * @{
   */
 #define LL_PKA_MODE_MONTGOMERY_PARAM_MOD_EXP ((uint32_t)0x00000000U) /*!< Compute Montgomery parameter and modular exponentiation */
@@ -172,9 +172,9 @@ typedef struct
   * @param  PKAx PKA Instance.
   * @param  Mode This parameter can be one of the following values:
   *         @arg @ref LL_PKA_MODE_MONTGOMERY_PARAM_MOD_EXP
+  *         @arg @ref LL_PKA_MODE_MONTGOMERY_PARAM_ECC
   *         @arg @ref LL_PKA_MODE_MONTGOMERY_PARAM
   *         @arg @ref LL_PKA_MODE_MODULAR_EXP
-  *         @arg @ref LL_PKA_MODE_MONTGOMERY_PARAM_ECC
   *         @arg @ref LL_PKA_MODE_ECC_KP_PRIMITIVE
   *         @arg @ref LL_PKA_MODE_ECDSA_SIGNATURE
   *         @arg @ref LL_PKA_MODE_ECDSA_VERIFICATION
@@ -234,9 +234,9 @@ __STATIC_INLINE uint32_t LL_PKA_IsEnabled(PKA_TypeDef *PKAx)
   * @param  PKAx PKA Instance.
   * @param  Mode This parameter can be one of the following values:
   *         @arg @ref LL_PKA_MODE_MONTGOMERY_PARAM_MOD_EXP
+  *         @arg @ref LL_PKA_MODE_MONTGOMERY_PARAM_ECC
   *         @arg @ref LL_PKA_MODE_MONTGOMERY_PARAM
   *         @arg @ref LL_PKA_MODE_MODULAR_EXP
-  *         @arg @ref LL_PKA_MODE_MONTGOMERY_PARAM_ECC
   *         @arg @ref LL_PKA_MODE_ECC_KP_PRIMITIVE
   *         @arg @ref LL_PKA_MODE_ECDSA_SIGNATURE
   *         @arg @ref LL_PKA_MODE_ECDSA_VERIFICATION
@@ -264,9 +264,9 @@ __STATIC_INLINE void LL_PKA_SetMode(PKA_TypeDef *PKAx, uint32_t Mode)
   * @param  PKAx PKA Instance.
   * @retval Returned value can be one of the following values:
   *         @arg @ref LL_PKA_MODE_MONTGOMERY_PARAM_MOD_EXP
+  *         @arg @ref LL_PKA_MODE_MONTGOMERY_PARAM_ECC
   *         @arg @ref LL_PKA_MODE_MONTGOMERY_PARAM
   *         @arg @ref LL_PKA_MODE_MODULAR_EXP
-  *         @arg @ref LL_PKA_MODE_MONTGOMERY_PARAM_ECC
   *         @arg @ref LL_PKA_MODE_ECC_KP_PRIMITIVE
   *         @arg @ref LL_PKA_MODE_ECDSA_SIGNATURE
   *         @arg @ref LL_PKA_MODE_ECDSA_VERIFICATION

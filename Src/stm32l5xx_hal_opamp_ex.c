@@ -4,11 +4,11 @@
   * @author  MCD Application Team
   * @brief   Extended OPAMP HAL module driver.
   *          This file provides firmware functions to manage the following
-  *          functionalities of the operational amplifier(s)(OPAMP1, OPAMP2 etc)
-  *          peripheral:
+  *          functionalities of the operational amplifier(s) peripheral:
   *           + Extended Initialization and de-initialization functions
   *           + Extended Peripheral Control functions
   *
+  @verbatim
   ******************************************************************************
   * @attention
   *
@@ -19,8 +19,6 @@
   * in the root directory of this software component.
   * If no LICENSE file comes with this software, it is provided AS-IS.
   *
-  ******************************************************************************
-  @verbatim
   ******************************************************************************
   */
 
@@ -134,7 +132,7 @@ HAL_StatusTypeDef HAL_OPAMPEx_SelfCalibrateAll(OPAMP_HandleTypeDef *hopamp1, OPA
     SET_BIT(hopamp2->Instance->CSR, OPAMP_CSR_USERTRIM);
 
     /* Select trimming settings depending on power mode */
-    if (hopamp1->Init.PowerMode == OPAMP_POWERMODE_NORMAL)
+    if (hopamp1->Init.PowerMode == OPAMP_POWERMODE_NORMALPOWER)
     {
       tmp_opamp1_reg_trimming = &OPAMP1->OTR;
     }
@@ -143,7 +141,7 @@ HAL_StatusTypeDef HAL_OPAMPEx_SelfCalibrateAll(OPAMP_HandleTypeDef *hopamp1, OPA
       tmp_opamp1_reg_trimming = &OPAMP1->LPOTR;
     }
 
-    if (hopamp2->Init.PowerMode == OPAMP_POWERMODE_NORMAL)
+    if (hopamp2->Init.PowerMode == OPAMP_POWERMODE_NORMALPOWER)
     {
       tmp_opamp2_reg_trimming = &OPAMP2->OTR;
     }
@@ -173,7 +171,7 @@ HAL_StatusTypeDef HAL_OPAMPEx_SelfCalibrateAll(OPAMP_HandleTypeDef *hopamp1, OPA
     while (delta != 0U)
     {
       /* Set candidate trimming */
-      /* OPAMP_POWERMODE_NORMAL */
+      /* OPAMP_POWERMODE_NORMALPOWER */
       MODIFY_REG(*tmp_opamp1_reg_trimming, OPAMP_OTR_TRIMOFFSETN, trimmingvaluen1);
       MODIFY_REG(*tmp_opamp2_reg_trimming, OPAMP_OTR_TRIMOFFSETN, trimmingvaluen2);
 
@@ -245,7 +243,7 @@ HAL_StatusTypeDef HAL_OPAMPEx_SelfCalibrateAll(OPAMP_HandleTypeDef *hopamp1, OPA
     while (delta != 0U)
     {
       /* Set candidate trimming */
-      /* OPAMP_POWERMODE_NORMAL */
+      /* OPAMP_POWERMODE_NORMALPOWER */
       MODIFY_REG(*tmp_opamp1_reg_trimming, OPAMP_OTR_TRIMOFFSETP, (trimmingvaluep1<<OPAMP_INPUT_NONINVERTING));
       MODIFY_REG(*tmp_opamp2_reg_trimming, OPAMP_OTR_TRIMOFFSETP, (trimmingvaluep2<<OPAMP_INPUT_NONINVERTING));
 
@@ -429,3 +427,5 @@ HAL_StatusTypeDef HAL_OPAMPEx_Unlock(OPAMP_HandleTypeDef* hopamp)
 /**
   * @}
   */
+
+

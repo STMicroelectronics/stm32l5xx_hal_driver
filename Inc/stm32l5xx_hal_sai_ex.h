@@ -101,3 +101,4 @@ HAL_StatusTypeDef HAL_SAIEx_ConfigPdmMicDelay(const SAI_HandleTypeDef *hsai,
 #endif
 
 #endif /* STM32L5xx_HAL_SAI_EX_H */
+

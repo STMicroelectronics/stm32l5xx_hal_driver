@@ -191,7 +191,7 @@ typedef void (*pWWDG_CallbackTypeDef)(WWDG_HandleTypeDef *hppp);  /*!< pointer t
 
 /**
   * @brief  Enable the WWDG early wakeup interrupt.
-  * @param  __HANDLE__ WWDG handle
+  * @param  __HANDLE__     WWDG handle
   * @param  __INTERRUPT__  specifies the interrupt to enable.
   *         This parameter can be one of the following values:
   *            @arg WWDG_IT_EWI: Early wakeup interrupt
@@ -240,7 +240,7 @@ typedef void (*pWWDG_CallbackTypeDef)(WWDG_HandleTypeDef *hppp);  /*!< pointer t
 #define __HAL_WWDG_CLEAR_FLAG(__HANDLE__, __FLAG__)         ((__HANDLE__)->Instance->SR = ~(__FLAG__))
 
 /** @brief  Check whether the specified WWDG interrupt source is enabled or not.
-  * @param  __HANDLE__  WWDG handle
+  * @param  __HANDLE__  WWDG Handle.
   * @param  __INTERRUPT__  specifies the WWDG interrupt source to check.
   *         This parameter can be one of the following values:
   *            @arg WWDG_IT_EWI: Early Wakeup Interrupt

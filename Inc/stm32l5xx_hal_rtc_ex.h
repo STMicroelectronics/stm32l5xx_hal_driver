@@ -1115,6 +1115,12 @@ typedef struct
   *            @arg  RTC_TAMPER_6: Tamper6
   *            @arg  RTC_TAMPER_7: Tamper7
   *            @arg  RTC_TAMPER_8: Tamper8
+  *            @arg  RTC_IT_INT_TAMP_ALL: All internal tampers interrupts
+  *            @arg  RTC_IT_INT_TAMP_1: Internal Tamper1 interrupt
+  *            @arg  RTC_IT_INT_TAMP_2: Internal Tamper2 interrupt
+  *            @arg  RTC_IT_INT_TAMP_3: Internal Tamper3 interrupt
+  *            @arg  RTC_IT_INT_TAMP_5: Internal Tamper5 interrupt
+  *            @arg  RTC_IT_INT_TAMP_8: Internal Tamper8 interrupt
   * @retval None
   */
 #define __HAL_RTC_TAMPER_ENABLE(__HANDLE__, __TAMPER__)           (TAMP->CR1 |= (__TAMPER__))
@@ -1133,6 +1139,12 @@ typedef struct
   *            @arg  RTC_TAMPER_6: Tamper6
   *            @arg  RTC_TAMPER_7: Tamper7
   *            @arg  RTC_TAMPER_8: Tamper8
+  *            @arg  RTC_IT_INT_TAMP_ALL: All internal tampers interrupts
+  *            @arg  RTC_IT_INT_TAMP_1: Internal Tamper1 interrupt
+  *            @arg  RTC_IT_INT_TAMP_2: Internal Tamper2 interrupt
+  *            @arg  RTC_IT_INT_TAMP_3: Internal Tamper3 interrupt
+  *            @arg  RTC_IT_INT_TAMP_5: Internal Tamper5 interrupt
+  *            @arg  RTC_IT_INT_TAMP_8: Internal Tamper8 interrupt
   */
 #define __HAL_RTC_TAMPER_DISABLE(__HANDLE__, __TAMPER__)           (TAMP->CR1 &= ~(__TAMPER__))
 
@@ -1152,6 +1164,12 @@ typedef struct
   *            @arg  RTC_IT_TAMP_6: Tamper6 interrupt
   *            @arg  RTC_IT_TAMP_7: Tamper7 interrupt
   *            @arg  RTC_IT_TAMP_8: Tamper8 interrupt
+  *            @arg  RTC_IT_INT_TAMP_ALL: All internal tampers interrupts
+  *            @arg  RTC_IT_INT_TAMP_1: Internal Tamper1 interrupt
+  *            @arg  RTC_IT_INT_TAMP_2: Internal Tamper2 interrupt
+  *            @arg  RTC_IT_INT_TAMP_3: Internal Tamper3 interrupt
+  *            @arg  RTC_IT_INT_TAMP_5: Internal Tamper5 interrupt
+  *            @arg  RTC_IT_INT_TAMP_8: Internal Tamper8 interrupt
   * @retval None
   */
 #define __HAL_RTC_TAMPER_ENABLE_IT(__HANDLE__, __INTERRUPT__)        (TAMP->IER |= (__INTERRUPT__))
@@ -1170,6 +1188,12 @@ typedef struct
   *            @arg  RTC_IT_TAMP_6: Tamper6 interrupt
   *            @arg  RTC_IT_TAMP_7: Tamper7 interrupt
   *            @arg  RTC_IT_TAMP_8: Tamper8 interrupt
+  *            @arg  RTC_IT_INT_TAMP_ALL: All internal tampers interrupts
+  *            @arg  RTC_IT_INT_TAMP_1: Internal Tamper1 interrupt
+  *            @arg  RTC_IT_INT_TAMP_2: Internal Tamper2 interrupt
+  *            @arg  RTC_IT_INT_TAMP_3: Internal Tamper3 interrupt
+  *            @arg  RTC_IT_INT_TAMP_5: Internal Tamper5 interrupt
+  *            @arg  RTC_IT_INT_TAMP_8: Internal Tamper8 interrupt
   * @retval None
   */
 #define __HAL_RTC_TAMPER_DISABLE_IT(__HANDLE__, __INTERRUPT__)       (TAMP->IER &= ~(__INTERRUPT__))
@@ -1603,3 +1627,5 @@ HAL_StatusTypeDef HAL_RTCEx_PrivilegeModeGet(RTC_HandleTypeDef *hrtc, RTC_Privil
 #endif
 
 #endif /* STM32L5xx_HAL_RTC_EX_H */
+
+

@@ -959,3 +959,4 @@ uint32_t HAL_SAI_GetError(const SAI_HandleTypeDef *hsai);
 #endif
 
 #endif /* STM32L5xx_HAL_SAI_H */
+

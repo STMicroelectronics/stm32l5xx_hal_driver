@@ -1974,3 +1974,4 @@ void        LL_EXTI_StructInit(LL_EXTI_InitTypeDef *EXTI_InitStruct);
 #endif
 
 #endif /* STM32L5xx_LL_EXTI_H */
+

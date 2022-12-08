@@ -279,3 +279,4 @@ HAL_StatusTypeDef HAL_IWDG_Refresh(IWDG_HandleTypeDef *hiwdg)
 /**
   * @}
   */
+

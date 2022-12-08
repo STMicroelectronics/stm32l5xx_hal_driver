@@ -25,7 +25,7 @@
 #include "stm32_assert.h"
 #else
 #define assert_param(expr) ((void)0U)
-#endif
+#endif /* USE_FULL_ASSERT */
 
 /** @addtogroup STM32L5xx_LL_Driver
   * @{
@@ -45,23 +45,23 @@
   * @{
   */
 #define IS_LL_PKA_MODE(__VALUE__)     (((__VALUE__) == LL_PKA_MODE_MONTGOMERY_PARAM_MOD_EXP) ||\
-                                      ((__VALUE__) == LL_PKA_MODE_MONTGOMERY_PARAM)          ||\
-                                      ((__VALUE__) == LL_PKA_MODE_MODULAR_EXP)               ||\
-                                      ((__VALUE__) == LL_PKA_MODE_MONTGOMERY_PARAM_ECC)      ||\
-                                      ((__VALUE__) == LL_PKA_MODE_ECC_KP_PRIMITIVE)          ||\
-                                      ((__VALUE__) == LL_PKA_MODE_ECDSA_SIGNATURE)           ||\
-                                      ((__VALUE__) == LL_PKA_MODE_ECDSA_VERIFICATION)        ||\
-                                      ((__VALUE__) == LL_PKA_MODE_POINT_CHECK)               ||\
-                                      ((__VALUE__) == LL_PKA_MODE_RSA_CRT_EXP)               ||\
-                                      ((__VALUE__) == LL_PKA_MODE_MODULAR_INV)               ||\
-                                      ((__VALUE__) == LL_PKA_MODE_ARITHMETIC_ADD)            ||\
-                                      ((__VALUE__) == LL_PKA_MODE_ARITHMETIC_SUB)            ||\
-                                      ((__VALUE__) == LL_PKA_MODE_ARITHMETIC_MUL)            ||\
-                                      ((__VALUE__) == LL_PKA_MODE_COMPARISON)                ||\
-                                      ((__VALUE__) == LL_PKA_MODE_MODULAR_REDUC)             ||\
-                                      ((__VALUE__) == LL_PKA_MODE_MODULAR_ADD)               ||\
-                                      ((__VALUE__) == LL_PKA_MODE_MODULAR_SUB)               ||\
-                                      ((__VALUE__) == LL_PKA_MODE_MONTGOMERY_MUL))
+                                       ((__VALUE__) == LL_PKA_MODE_MONTGOMERY_PARAM)          ||\
+                                       ((__VALUE__) == LL_PKA_MODE_MODULAR_EXP)               ||\
+                                       ((__VALUE__) == LL_PKA_MODE_MONTGOMERY_PARAM_ECC)      ||\
+                                       ((__VALUE__) == LL_PKA_MODE_ECC_KP_PRIMITIVE)          ||\
+                                       ((__VALUE__) == LL_PKA_MODE_ECDSA_SIGNATURE)           ||\
+                                       ((__VALUE__) == LL_PKA_MODE_ECDSA_VERIFICATION)        ||\
+                                       ((__VALUE__) == LL_PKA_MODE_POINT_CHECK)               ||\
+                                       ((__VALUE__) == LL_PKA_MODE_RSA_CRT_EXP)               ||\
+                                       ((__VALUE__) == LL_PKA_MODE_MODULAR_INV)               ||\
+                                       ((__VALUE__) == LL_PKA_MODE_ARITHMETIC_ADD)            ||\
+                                       ((__VALUE__) == LL_PKA_MODE_ARITHMETIC_SUB)            ||\
+                                       ((__VALUE__) == LL_PKA_MODE_ARITHMETIC_MUL)            ||\
+                                       ((__VALUE__) == LL_PKA_MODE_COMPARISON)                ||\
+                                       ((__VALUE__) == LL_PKA_MODE_MODULAR_REDUC)             ||\
+                                       ((__VALUE__) == LL_PKA_MODE_MODULAR_ADD)               ||\
+                                       ((__VALUE__) == LL_PKA_MODE_MODULAR_SUB)               ||\
+                                       ((__VALUE__) == LL_PKA_MODE_MONTGOMERY_MUL))
 /**
   * @}
   */

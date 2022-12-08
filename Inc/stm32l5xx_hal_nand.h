@@ -323,8 +323,10 @@ uint32_t              HAL_NAND_Read_Status(NAND_HandleTypeDef *hnand);
   * @retval NAND Raw address value
   */
 #define ARRAY_ADDRESS(__ADDRESS__ , __HANDLE__) ((__ADDRESS__)->Page + \
-                                                 (((__ADDRESS__)->Block + (((__ADDRESS__)->Plane) * \
-                                                 ((__HANDLE__)->Config.PlaneSize)))* ((__HANDLE__)->Config.BlockSize)))
+                                                 (((__ADDRESS__)->Block + \
+                                                   (((__ADDRESS__)->Plane) * \
+                                                    ((__HANDLE__)->Config.PlaneSize))) * \
+                                                  ((__HANDLE__)->Config.BlockSize)))
 
 /**
   * @brief  NAND memory Column address computation.

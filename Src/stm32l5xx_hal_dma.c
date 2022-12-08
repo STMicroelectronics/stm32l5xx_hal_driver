@@ -1367,3 +1367,5 @@ static void DMA_CalcDMAMUXRequestGenBaseAndMask(DMA_HandleTypeDef *hdma)
 /**
   * @}
   */
+
+

@@ -775,3 +775,5 @@ HAL_StatusTypeDef HAL_DMA_GetConfigChannelAttributes(DMA_HandleTypeDef *hdma, ui
 #endif
 
 #endif /* STM32L5xx_HAL_DMA_H */
+
+

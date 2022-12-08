@@ -25,7 +25,7 @@
 #include "stm32_assert.h"
 #else
 #define assert_param(expr) ((void)0U)
-#endif
+#endif /* USE_FULL_ASSERT */
 
 /** @addtogroup STM32L5xx_LL_Driver
   * @{
@@ -292,3 +292,4 @@ void LL_SPI_StructInit(LL_SPI_InitTypeDef *SPI_InitStruct)
   */
 
 #endif /* USE_FULL_LL_DRIVER */
+

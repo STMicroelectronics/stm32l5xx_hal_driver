@@ -24,7 +24,7 @@
 #include "stm32_assert.h"
 #else
 #define assert_param(expr) ((void)0U)
-#endif
+#endif /* USE_FULL_ASSERT */
 
 /** @addtogroup STM32L5xx_LL_Driver
   * @{
@@ -168,7 +168,7 @@ ErrorStatus LL_COMP_DeInit(COMP_TypeDef *COMPx)
   *          - SUCCESS: COMP registers are initialized
   *          - ERROR: COMP registers are not initialized
   */
-ErrorStatus LL_COMP_Init(COMP_TypeDef *COMPx, LL_COMP_InitTypeDef *COMP_InitStruct)
+ErrorStatus LL_COMP_Init(COMP_TypeDef *COMPx, const LL_COMP_InitTypeDef *COMP_InitStruct)
 {
   ErrorStatus status = SUCCESS;
 

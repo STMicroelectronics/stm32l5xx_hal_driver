@@ -5,6 +5,7 @@
   * @brief   HAL configuration template file.
   *          This file should be copied to the application folder and renamed
   *          to stm32l5xx_hal_conf.h.
+  *
   ******************************************************************************
   * @attention
   *
@@ -433,3 +434,6 @@ void assert_failed(uint8_t *file, uint32_t line);
 #endif
 
 #endif /* STM32L5xx_HAL_CONF_H */
+
+
+

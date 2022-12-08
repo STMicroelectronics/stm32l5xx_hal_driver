@@ -364,3 +364,4 @@ HAL_StatusTypeDef HAL_EXTI_GetConfigLineAttributes(uint32_t ExtiLine, uint32_t *
 #endif
 
 #endif /* STM32L5xx_HAL_EXTI_H */
+

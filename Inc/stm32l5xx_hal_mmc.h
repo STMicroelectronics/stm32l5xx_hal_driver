@@ -63,15 +63,18 @@ typedef enum
   */
 typedef uint32_t HAL_MMC_CardStateTypeDef;
 
-#define HAL_MMC_CARD_READY          0x00000001U  /*!< Card state is ready                     */
-#define HAL_MMC_CARD_IDENTIFICATION 0x00000002U  /*!< Card is in identification state         */
-#define HAL_MMC_CARD_STANDBY        0x00000003U  /*!< Card is in standby state                */
-#define HAL_MMC_CARD_TRANSFER       0x00000004U  /*!< Card is in transfer state               */
-#define HAL_MMC_CARD_SENDING        0x00000005U  /*!< Card is sending an operation            */
-#define HAL_MMC_CARD_RECEIVING      0x00000006U  /*!< Card is receiving operation information */
-#define HAL_MMC_CARD_PROGRAMMING    0x00000007U  /*!< Card is in programming state            */
-#define HAL_MMC_CARD_DISCONNECTED   0x00000008U  /*!< Card is disconnected                    */
-#define HAL_MMC_CARD_ERROR          0x000000FFU  /*!< Card response Error                     */
+#define HAL_MMC_CARD_IDLE           0x00000000U  /*!< Card is in idle state (can't be checked by CMD13)           */
+#define HAL_MMC_CARD_READY          0x00000001U  /*!< Card state is ready (can't be checked by CMD13)             */
+#define HAL_MMC_CARD_IDENTIFICATION 0x00000002U  /*!< Card is in identification state (can't be checked by CMD13) */
+#define HAL_MMC_CARD_STANDBY        0x00000003U  /*!< Card is in standby state                                    */
+#define HAL_MMC_CARD_TRANSFER       0x00000004U  /*!< Card is in transfer state                                   */
+#define HAL_MMC_CARD_SENDING        0x00000005U  /*!< Card is sending an operation                                */
+#define HAL_MMC_CARD_RECEIVING      0x00000006U  /*!< Card is receiving operation information                     */
+#define HAL_MMC_CARD_PROGRAMMING    0x00000007U  /*!< Card is in programming state                                */
+#define HAL_MMC_CARD_DISCONNECTED   0x00000008U  /*!< Card is disconnected                                        */
+#define HAL_MMC_CARD_BUSTEST        0x00000009U  /*!< Card is in bus test state                                   */
+#define HAL_MMC_CARD_SLEEP          0x0000000AU  /*!< Card is in sleep state (can't be checked by CMD13)          */
+#define HAL_MMC_CARD_ERROR          0x000000FFU  /*!< Card response Error (can't be checked by CMD13)             */
 /**
   * @}
   */
@@ -341,9 +344,9 @@ typedef void (*pMMC_CallbackTypeDef)(MMC_HandleTypeDef *hmmc);
 #define MMC_HIGH_VOLTAGE_RANGE         0x80FF8000U  /*!< High voltage in byte mode    */
 #define MMC_DUAL_VOLTAGE_RANGE         0x80FF8080U  /*!< Dual voltage in byte mode    */
 #define MMC_LOW_VOLTAGE_RANGE          0x80000080U  /*!< Low voltage in byte mode     */
-#define eMMC_HIGH_VOLTAGE_RANGE        0xC0FF8000U  /*!< High voltage in sector mode  */
-#define eMMC_DUAL_VOLTAGE_RANGE        0xC0FF8080U  /*!< Dual voltage in sector mode  */
-#define eMMC_LOW_VOLTAGE_RANGE         0xC0000080U  /*!< Low voltage in sector mode   */
+#define EMMC_HIGH_VOLTAGE_RANGE        0xC0FF8000U  /*!< High voltage in sector mode  */
+#define EMMC_DUAL_VOLTAGE_RANGE        0xC0FF8080U  /*!< Dual voltage in sector mode  */
+#define EMMC_LOW_VOLTAGE_RANGE         0xC0000080U  /*!< Low voltage in sector mode   */
 #define MMC_INVALID_VOLTAGE_RANGE      0x0001FF01U
 /**
   * @}
@@ -728,6 +731,14 @@ HAL_StatusTypeDef HAL_MMC_GetSupportedSecRemovalType(MMC_HandleTypeDef *hmmc, ui
   * @}
   */
 
+/** @defgroup MMC_Exported_Functions_Group8 Peripheral Sleep management
+  * @{
+  */
+HAL_StatusTypeDef HAL_MMC_SleepDevice(MMC_HandleTypeDef *hmmc);
+HAL_StatusTypeDef HAL_MMC_AwakeDevice(MMC_HandleTypeDef *hmmc);
+/**
+  * @}
+  */
 /* Private types -------------------------------------------------------------*/
 /** @defgroup MMC_Private_Types MMC Private Types
   * @{

@@ -333,7 +333,7 @@ typedef void (*pOPAMP_CallbackTypeDef)(OPAMP_HandleTypeDef *hopamp);
                                  ((GAIN) == OPAMP_PGA_GAIN_8) || \
                                  ((GAIN) == OPAMP_PGA_GAIN_16))
 
-#define IS_OPAMP_POWERMODE(TRIMMING) (((TRIMMING) == OPAMP_POWERMODE_NORMAL) || \
+#define IS_OPAMP_POWERMODE(TRIMMING) (((TRIMMING) == OPAMP_POWERMODE_NORMALPOWER) || \
                                       ((TRIMMING) == OPAMP_POWERMODE_LOWPOWER) )
 
 #define IS_OPAMP_POWER_SUPPLY_RANGE(RANGE) (((RANGE) == OPAMP_POWERSUPPLY_LOW) || \
@@ -431,3 +431,4 @@ HAL_OPAMP_StateTypeDef HAL_OPAMP_GetState(OPAMP_HandleTypeDef *hopamp);
 #endif
 
 #endif /* STM32L5xx_HAL_OPAMP_H */
+

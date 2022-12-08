@@ -94,7 +94,7 @@ void RTC_IRQHandler(void);
   */
 HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority)
 {
-  HAL_StatusTypeDef status = HAL_OK;
+  HAL_StatusTypeDef status;
   __IO uint32_t counter = 0U;
 
   RCC_OscInitTypeDef        RCC_OscInitStruct;
@@ -105,14 +105,14 @@ HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority)
   if ((uint32_t)uwTickFreq != 0U)
   {
 #ifdef RTC_CLOCK_SOURCE_LSE
-    /* Configue LSE as RTC clock source */
+    /* Configure LSE as RTC clock source */
     RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSE;
     RCC_OscInitStruct.LSEState = RCC_LSE_ON_RTC_ONLY;
     RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
 
     PeriphClkInitStruct.RTCClockSelection = RCC_RTCCLKSOURCE_LSE;
 #elif defined (RTC_CLOCK_SOURCE_LSI)
-    /* Configue LSI as RTC clock source */
+    /* Configure LSI as RTC clock source */
     RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSI;
     RCC_OscInitStruct.LSIState = RCC_LSI_ON;
     RCC_OscInitStruct.LSIDiv = RCC_LSI_DIV1;
@@ -120,7 +120,7 @@ HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority)
 
     PeriphClkInitStruct.RTCClockSelection = RCC_RTCCLKSOURCE_LSI;
 #elif defined (RTC_CLOCK_SOURCE_HSE)
-    /* Configue HSE as RTC clock source */
+    /* Configure HSE as RTC clock source */
     RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
     RCC_OscInitStruct.HSEState = RCC_HSE_ON;
     RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
@@ -177,7 +177,8 @@ HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority)
           /* Wait till RTC WUTWF flag is set  */
           while (__HAL_RTC_WAKEUPTIMER_GET_FLAG(&hRTC_Handle, RTC_FLAG_WUTWF) == 0U)
           {
-            if (counter++ == (SystemCoreClock / 56U))
+            counter++;
+            if (counter == (SystemCoreClock / 56U))
             {
               status = HAL_ERROR;
               break;
@@ -299,3 +300,5 @@ void RTC_IRQHandler(void)
 /**
   * @}
   */
+
+

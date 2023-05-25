@@ -426,6 +426,8 @@ __weak void HAL_SYSTICK_Callback(void)
   */
 void HAL_MPU_Enable(uint32_t MPU_Control)
 {
+  __DMB(); /* Data Memory Barrier operation to force any outstanding writes to memory before enabling the MPU */
+
   /* Enable the MPU */
   MPU->CTRL   = MPU_Control | MPU_CTRL_ENABLE_Msk;
 
@@ -433,9 +435,9 @@ void HAL_MPU_Enable(uint32_t MPU_Control)
   SCB->SHCSR |= SCB_SHCSR_MEMFAULTENA_Msk;
 
   /* Follow ARM recommendation with */
-  /* - Data Memory Barrier and Instruction Synchronization to insure MPU usage */
-  __DMB(); /* Force memory writes before continuing */
-  __ISB(); /* Flush and refill pipeline with updated permissions */
+  /* Data Synchronization and Instruction Synchronization Barriers to ensure MPU configuration */
+  __DSB(); /* Ensure that the subsequent instruction is executed only after the write to memory */
+  __ISB(); /* Flush and refill pipeline with updated MPU configuration settings */
 }
 
 /**
@@ -446,8 +448,16 @@ void HAL_MPU_Disable(void)
 {
   __DMB(); /* Force any outstanding transfers to complete before disabling MPU */
 
+  /* Disable fault exceptions */
+  SCB->SHCSR &= ~SCB_SHCSR_MEMFAULTENA_Msk;
+
   /* Disable the MPU */
   MPU->CTRL  &= ~MPU_CTRL_ENABLE_Msk;
+
+  /* Follow ARM recommendation with */
+  /* Data Synchronization and Instruction Synchronization Barriers to ensure MPU configuration */
+  __DSB(); /* Ensure that the subsequent instruction is executed only after the write to memory */
+  __ISB(); /* Flush and refill pipeline with updated MPU configuration settings */
 }
 
 /**
@@ -486,6 +496,8 @@ void HAL_MPU_ConfigMemoryAttributes(MPU_Attributes_InitTypeDef *MPU_AttributesIn
   */
 void HAL_MPU_Enable_NS(uint32_t MPU_Control)
 {
+  __DMB(); /* Data Memory Barrier operation to force any outstanding writes to memory before enabling the MPU */
+
   /* Enable the MPU */
   MPU_NS->CTRL   = MPU_Control | MPU_CTRL_ENABLE_Msk;
 
@@ -493,9 +505,9 @@ void HAL_MPU_Enable_NS(uint32_t MPU_Control)
   SCB_NS->SHCSR |= SCB_SHCSR_MEMFAULTENA_Msk;
 
   /* Follow ARM recommendation with */
-  /* - Data Memory Barrier and Instruction Synchronization to insure MPU usage */
-  __DMB(); /* Force memory writes before continuing */
-  __ISB(); /* Flush and refill pipeline with updated permissions */
+  /* Data Synchronization and Instruction Synchronization Barriers to ensure MPU configuration */
+  __DSB(); /* Ensure that the subsequent instruction is executed only after the write to memory */
+  __ISB(); /* Flush and refill pipeline with updated MPU configuration settings */
 }
 
 /**
@@ -506,8 +518,16 @@ void HAL_MPU_Disable_NS(void)
 {
   __DMB(); /* Force any outstanding transfers to complete before disabling MPU */
 
+  /* Disable fault exceptions */
+  SCB_NS->SHCSR &= ~SCB_SHCSR_MEMFAULTENA_Msk;
+
   /* Disable the MPU */
   MPU_NS->CTRL  &= ~MPU_CTRL_ENABLE_Msk;
+
+  /* Follow ARM recommendation with */
+  /* Data Synchronization and Instruction Synchronization Barriers to ensure MPU configuration */
+  __DSB(); /* Ensure that the subsequent instruction is executed only after the write to memory */
+  __ISB(); /* Flush and refill pipeline with updated MPU configuration settings */
 }
 
 /**

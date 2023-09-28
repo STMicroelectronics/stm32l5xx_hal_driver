@@ -1377,8 +1377,11 @@ HAL_StatusTypeDef HAL_RCC_ClockConfig(RCC_ClkInitTypeDef  *RCC_ClkInitStruct, ui
 void HAL_RCC_MCOConfig(uint32_t RCC_MCOx, uint32_t RCC_MCOSource, uint32_t RCC_MCODiv)
 {
   GPIO_InitTypeDef GPIO_InitStruct;
+
+  /* Prevent unused argument(s) compilation warning */
+  UNUSED(RCC_MCOx);
+
   /* Check the parameters */
-  assert_param(IS_RCC_MCO(RCC_MCOx));
   assert_param(IS_RCC_MCODIV(RCC_MCODiv));
   assert_param(IS_RCC_MCO1SOURCE(RCC_MCOSource));
 
@@ -1805,7 +1808,6 @@ uint32_t HAL_RCC_GetResetSource(void)
 void HAL_RCC_ConfigAttributes(uint32_t Item, uint32_t Attributes)
 {
   /* Check the parameters */
-  assert_param(IS_RCC_ITEMS_ATTRIBUTES(Item));
   assert_param(IS_RCC_ATTRIBUTES(Attributes));
 
   /* Privilege/non-privilege attribute */
@@ -1824,6 +1826,9 @@ void HAL_RCC_ConfigAttributes(uint32_t Item, uint32_t Attributes)
 
 #if defined (__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE == 3U)
 
+  /* Check the parameters */
+  assert_param(IS_RCC_ITEMS_ATTRIBUTES(Item));
+
   /* Secure/non-secure attribute */
   if ((Attributes & RCC_SEC) == RCC_SEC)
   {
@@ -1837,6 +1842,11 @@ void HAL_RCC_ConfigAttributes(uint32_t Item, uint32_t Attributes)
   {
     /* do nothing */
   }
+
+#else
+
+  /* Prevent unused argument(s) compilation warning */
+  UNUSED(Item);
 
 #endif /* __ARM_FEATURE_CMSE */
 }
@@ -1859,8 +1869,6 @@ HAL_StatusTypeDef HAL_RCC_GetConfigAttributes(uint32_t Item, uint32_t *pAttribut
     return HAL_ERROR;
   }
 
-  /* Check the parameters */
-  assert_param(IS_RCC_ITEMS_ATTRIBUTES(Item));
 
   /* Get privilege or non-privilege attribute */
   if (READ_BIT(RCC->CR, RCC_CR_PRIV) != 0U)
@@ -1874,6 +1882,9 @@ HAL_StatusTypeDef HAL_RCC_GetConfigAttributes(uint32_t Item, uint32_t *pAttribut
 
 #if defined (__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE == 3U)
 
+  /* Check the parameters */
+  assert_param(IS_RCC_ITEMS_ATTRIBUTES(Item));
+
   /* Get the secure or non-secure attribute state */
   if ((RCC_S->SECCFGR & Item) == Item)
   {
@@ -1883,6 +1894,11 @@ HAL_StatusTypeDef HAL_RCC_GetConfigAttributes(uint32_t Item, uint32_t *pAttribut
   {
     attributes |= RCC_NSEC;
   }
+
+#else
+
+  /* Prevent unused argument(s) compilation warning */
+  UNUSED(Item);
 
 #endif /* __ARM_FEATURE_CMSE */
 

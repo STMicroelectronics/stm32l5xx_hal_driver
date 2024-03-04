@@ -1549,8 +1549,8 @@ uint32_t HAL_RCC_GetPCLK2Freq(void)
 }
 
 /**
-  * @brief  Configure the RCC_OscInitStruct according to the internal
-  *         RCC configuration registers.
+  * @brief  Return the oscillators and main PLL configuration in RCC_OscInitStruct
+  *         according to the internal RCC configuration registers.
   * @param  RCC_OscInitStruct  pointer to an RCC_OscInitTypeDef structure that
   *         will be configured.
   * @retval None
@@ -1565,13 +1565,16 @@ void HAL_RCC_GetOscConfig(RCC_OscInitTypeDef  *RCC_OscInitStruct)
                                       RCC_OSCILLATORTYPE_LSE | RCC_OSCILLATORTYPE_LSI | RCC_OSCILLATORTYPE_HSI48;
 
   /* Get the HSE configuration -----------------------------------------------*/
-  if ((RCC->CR & RCC_CR_HSEBYP) == RCC_CR_HSEBYP)
+  if ((RCC->CR & RCC_CR_HSERDY) == RCC_CR_HSERDY)
   {
-    RCC_OscInitStruct->HSEState = RCC_HSE_BYPASS;
-  }
-  else if ((RCC->CR & RCC_CR_HSEON) == RCC_CR_HSEON)
-  {
-    RCC_OscInitStruct->HSEState = RCC_HSE_ON;
+    if ((RCC->CR & RCC_CR_HSEBYP) == RCC_CR_HSEBYP)
+    {
+      RCC_OscInitStruct->HSEState = RCC_HSE_BYPASS;
+    }
+    else
+    {
+      RCC_OscInitStruct->HSEState = RCC_HSE_ON;
+    }
   }
   else
   {
@@ -1579,7 +1582,7 @@ void HAL_RCC_GetOscConfig(RCC_OscInitTypeDef  *RCC_OscInitStruct)
   }
 
   /* Get the MSI configuration -----------------------------------------------*/
-  if ((RCC->CR & RCC_CR_MSION) == RCC_CR_MSION)
+  if ((RCC->CR & RCC_CR_MSIRDY) == RCC_CR_MSIRDY)
   {
     RCC_OscInitStruct->MSIState = RCC_MSI_ON;
   }
@@ -1592,7 +1595,7 @@ void HAL_RCC_GetOscConfig(RCC_OscInitTypeDef  *RCC_OscInitStruct)
   RCC_OscInitStruct->MSIClockRange = (uint32_t)((RCC->CR & RCC_CR_MSIRANGE));
 
   /* Get the HSI configuration -----------------------------------------------*/
-  if ((RCC->CR & RCC_CR_HSION) == RCC_CR_HSION)
+  if ((RCC->CR & RCC_CR_HSIRDY) == RCC_CR_HSIRDY)
   {
     RCC_OscInitStruct->HSIState = RCC_HSI_ON;
   }
@@ -1604,26 +1607,29 @@ void HAL_RCC_GetOscConfig(RCC_OscInitTypeDef  *RCC_OscInitStruct)
   RCC_OscInitStruct->HSICalibrationValue = (uint32_t)((RCC->ICSCR & RCC_ICSCR_HSITRIM) >> RCC_ICSCR_HSITRIM_Pos);
 
   /* Get the LSE configuration -----------------------------------------------*/
-  if ((RCC->BDCR & RCC_BDCR_LSEBYP) == RCC_BDCR_LSEBYP)
+  if ((RCC->BDCR & RCC_BDCR_LSERDY) == RCC_BDCR_LSERDY)
   {
-    if ((RCC->BDCR & RCC_BDCR_LSESYSEN) == RCC_BDCR_LSESYSEN)
+    if ((RCC->BDCR & RCC_BDCR_LSEBYP) == RCC_BDCR_LSEBYP)
     {
-      RCC_OscInitStruct->LSEState = RCC_LSE_BYPASS;
+      if ((RCC->BDCR & RCC_BDCR_LSESYSEN) == RCC_BDCR_LSESYSEN)
+      {
+        RCC_OscInitStruct->LSEState = RCC_LSE_BYPASS;
+      }
+      else
+      {
+        RCC_OscInitStruct->LSEState = RCC_LSE_BYPASS_RTC_ONLY;
+      }
     }
     else
     {
-      RCC_OscInitStruct->LSEState = RCC_LSE_BYPASS_RTC_ONLY;
-    }
-  }
-  else if ((RCC->BDCR & RCC_BDCR_LSEON) == RCC_BDCR_LSEON)
-  {
-    if ((RCC->BDCR & RCC_BDCR_LSESYSEN) == RCC_BDCR_LSESYSEN)
-    {
-      RCC_OscInitStruct->LSEState = RCC_LSE_ON;
-    }
-    else
-    {
-      RCC_OscInitStruct->LSEState = RCC_LSE_ON_RTC_ONLY;
+      if ((RCC->BDCR & RCC_BDCR_LSESYSEN) == RCC_BDCR_LSESYSEN)
+      {
+        RCC_OscInitStruct->LSEState = RCC_LSE_ON;
+      }
+      else
+      {
+        RCC_OscInitStruct->LSEState = RCC_LSE_ON_RTC_ONLY;
+      }
     }
   }
   else
@@ -1632,7 +1638,7 @@ void HAL_RCC_GetOscConfig(RCC_OscInitTypeDef  *RCC_OscInitStruct)
   }
 
   /* Get the LSI configuration -----------------------------------------------*/
-  if ((RCC->CSR & RCC_CSR_LSION) == RCC_CSR_LSION)
+  if ((RCC->CSR & RCC_CSR_LSIRDY) == RCC_CSR_LSIRDY)
   {
     RCC_OscInitStruct->LSIState = RCC_LSI_ON;
   }
@@ -1651,7 +1657,7 @@ void HAL_RCC_GetOscConfig(RCC_OscInitTypeDef  *RCC_OscInitStruct)
   }
 
   /* Get the HSI48 configuration ---------------------------------------------*/
-  if ((RCC->CRRCR & RCC_CRRCR_HSI48ON) == RCC_CRRCR_HSI48ON)
+  if ((RCC->CRRCR & RCC_CRRCR_HSI48RDY) == RCC_CRRCR_HSI48RDY)
   {
     RCC_OscInitStruct->HSI48State = RCC_HSI48_ON;
   }
@@ -1661,7 +1667,7 @@ void HAL_RCC_GetOscConfig(RCC_OscInitTypeDef  *RCC_OscInitStruct)
   }
 
   /* Get the PLL configuration -----------------------------------------------*/
-  if ((RCC->CR & RCC_CR_PLLON) == RCC_CR_PLLON)
+  if ((RCC->CR & RCC_CR_PLLRDY) == RCC_CR_PLLRDY)
   {
     RCC_OscInitStruct->PLL.PLLState = RCC_PLL_ON;
   }
@@ -1678,8 +1684,8 @@ void HAL_RCC_GetOscConfig(RCC_OscInitTypeDef  *RCC_OscInitStruct)
 }
 
 /**
-  * @brief  Configure the RCC_ClkInitStruct according to the internal
-  *         RCC configuration registers.
+  * @brief  Return the clocks configuration in RCC_ClkInitStruct according to the
+  *         internal RCC configuration registers as well as the current FLASH latency.
   * @param  RCC_ClkInitStruct  pointer to an RCC_ClkInitTypeDef structure that
   *         will be configured.
   * @param  pFLatency  Pointer on the Flash Latency.

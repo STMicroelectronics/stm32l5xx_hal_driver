@@ -154,7 +154,7 @@ extern "C" {
   * @{
   */
 #define LL_MPU_ACCESS_NOT_SHAREABLE        (0U << MPU_RBAR_SH_Pos)
-#define LL_MPU_ACCESS_OUTER_SHAREABLE      (1U << MPU_RBAR_SH_Pos)
+#define LL_MPU_ACCESS_OUTER_SHAREABLE      (2U << MPU_RBAR_SH_Pos)
 #define LL_MPU_ACCESS_INNER_SHAREABLE      (3U << MPU_RBAR_SH_Pos)
 /**
   * @}
